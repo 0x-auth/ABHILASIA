@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>φ-Guided Passkey Generator (Fixed)</title>
+    <style>
+        body {
+            font-family: 'Monaco', 'Menlo', monospace;
+            background: #0f0f1e;
+            color: #00ff88;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #00ff88;
+        }
+        .generate-btn {
+            background: #00ff88;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 100%;
+            margin: 20px 0;
+        }
+        .result {
+            background: #1a1a2e;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            word-break: break-all;
+        }
+        .copy-btn {
+            background: #4a4a6a;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            float: right;
+        }
+        h3 {
+            color: #66ffaa;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 φ-Guided Passkey Generator (Fixed)</h1>
+        <p>Generate secure passwords for GitHub and other services</p>
+        
+        <button class="generate-btn" onclick="generateSimplePasskey()">Generate Passkey</button>
+        
+        <div id="results" style="display:none;">
+            <h3>Main Password</h3>
+            <div class="result">
+                <button class="copy-btn" onclick="copyText('mainPass')">Copy</button>
+                <span id="mainPass"></span>
+            </div>
+            
+            <h3>Alternative Format (if special chars cause issues)</h3>
+            <div class="result">
+                <button class="copy-btn" onclick="copyText('altPass')">Copy</button>
+                <span id="altPass"></span>
+            </div>
+            
+            <h3>Recovery Code</h3>
+            <div class="result">
+                <button class="copy-btn" onclick="copyText('recoveryCode')">Copy</button>
+                <span id="recoveryCode"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateSimplePasskey() {
+            const phi = 1.618033988749895;
+            const timestamp = Date.now();
+            
+            // Generate base components
+            const base = Math.floor(timestamp * phi).toString(36).substring(0, 8).toUpperCase();
+            const entropy = Math.random().toString(36).substring(2, 8);
+            const special = ['!', '@', '#', '$', '%', '^', '&', '*'][Math.floor(Math.random() * 8)];
+            
+            // Main password with special characters
+            const mainPassword = `Phi${base}${special}${entropy}${special}2025`;
+            
+            // Alternative without special chars (in case GitHub rejects)
+            const altPassword = `PhiGuided${base}${entropy}2025`;
+            
+            // Recovery code
+            const recoveryCode = `RECOVER-${base}-${entropy.toUpperCase()}`;
+            
+            // Display results
+            document.getElementById('mainPass').textContent = mainPassword;
+            document.getElementById('altPass').textContent = altPassword;
+            document.getElementById('recoveryCode').textContent = recoveryCode;
+            document.getElementById('results').style.display = 'block';
+        }
+        
+        function copyText(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            });
+        }
+        
+        // Generate on load
+        window.onload = () => generateSimplePasskey();
+    </script>
+</body>
+</html>

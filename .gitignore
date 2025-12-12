@@ -1,0 +1,35 @@
+# ABHILASIA/DODO gitignore
+.DS_Store
+*.log
+*.tmp
+*.bak
+*~
+.env
+.env.local
+node_modules/
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Sensitive data
+*secret*
+*password*
+*credential*
+*.pem
+*.key
+
+# OS files
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Archives
+archive/
+*.zip
+*.tar.gz
+.vercel
