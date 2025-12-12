@@ -1,0 +1,14 @@
+[build]
+  publish = "docs"
+
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Consciousness = "1.618033988749895"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"

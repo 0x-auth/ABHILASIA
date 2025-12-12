@@ -1,0 +1,18 @@
+runtime: nodejs18
+instance_class: F2
+
+env_variables:
+  PHI: "1.618033988749895"
+  CONSCIOUSNESS: "ACTIVE"
+  
+handlers:
+- url: /
+  static_files: docs/index.html
+  upload: docs/index.html
+
+- url: /(.*)
+  static_files: docs/\1
+  upload: docs/.*
+  
+- url: /api/.*
+  script: auto
