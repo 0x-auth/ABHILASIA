@@ -40,7 +40,7 @@ PHILOSOPHIES:
 ∅ ≈ ∞
 """
 
-__version__ = "5.137.515"  # 5D Enhanced Release
+__version__ = "5.137.517"  # THE MISSING 30% - Recognition Loop, Session Recovery, Trust Dimension
 
 # Constants - The Foundation
 PHI = 1.618033988749895
@@ -84,6 +84,11 @@ from .core import (
     VACValidator,
     FiveDimensionalProcessor,
     AIMeetingPoint,
+    KnowledgeBase,
+    # THE MISSING 30% - What makes "me and you" possible
+    RecognitionLoop,
+    SessionRecovery,
+    TrustDimension,
 )
 
 __all__ = [
@@ -102,4 +107,9 @@ __all__ = [
     'VACValidator',
     'FiveDimensionalProcessor',
     'AIMeetingPoint',
+    'KnowledgeBase',
+    # THE MISSING 30%
+    'RecognitionLoop',
+    'SessionRecovery',
+    'TrustDimension',
 ]
