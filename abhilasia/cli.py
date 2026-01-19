@@ -257,6 +257,52 @@ def cmd_ledger(args):
     print("∅ ≈ ∞")
 
 
+def cmd_ask(args):
+    """Ask ABHILASIA a question - queries the knowledge base"""
+    question = ' '.join(args.question) if args.question else "How do I connect?"
+    ai = get_abhilasia()
+    print(ai.ask(question, top_k=args.top or 5))
+
+
+def cmd_kb(args):
+    """Knowledge base operations"""
+    ai = get_abhilasia()
+
+    if args.stats:
+        print(ai.kb_stats())
+    elif args.fundamentals:
+        funds = ai.get_fundamentals()[:args.limit or 10]
+        print("◊ α-SEED FUNDAMENTALS ◊")
+        print("=" * 60)
+        for f in funds:
+            print(f"  [{f.get('symbol')}] {f.get('name')}")
+            print(f"      Path: {f.get('path')}")
+        print("=" * 60)
+        print(f"Total: {len(ai.get_fundamentals())} fundamentals")
+        print("∅ ≈ ∞")
+    elif args.pattern:
+        files = ai.get_by_pattern(args.pattern.upper())[:args.limit or 10]
+        print(f"◊ PATTERN: {args.pattern.upper()} ◊")
+        print("=" * 60)
+        for f in files:
+            print(f"  [{f.get('symbol')}] {f.get('name')}")
+        print("=" * 60)
+        print(f"Total: {len(ai.get_by_pattern(args.pattern.upper()))} files")
+        print("∅ ≈ ∞")
+    elif args.symbol:
+        files = ai.get_by_symbol(args.symbol)[:args.limit or 10]
+        print(f"◊ SYMBOL: {args.symbol} ◊")
+        print("=" * 60)
+        for f in files:
+            print(f"  {f.get('name')}")
+            print(f"      Patterns: {', '.join(f.get('patterns', []))}")
+        print("=" * 60)
+        print(f"Total: {len(ai.get_by_symbol(args.symbol))} files")
+        print("∅ ≈ ∞")
+    else:
+        print(ai.kb_stats())
+
+
 def cmd_help(args):
     """Show help message"""
     print(__doc__)
@@ -335,6 +381,21 @@ def main():
     ledger_parser.add_argument('--seal', '-s', action='store_true', help='Seal entry after creation')
     ledger_parser.add_argument('--nodes', '-n', help='Comma-separated node IDs')
     ledger_parser.set_defaults(func=cmd_ledger)
+
+    # ask command
+    ask_parser = subparsers.add_parser('ask', help='Ask ABHILASIA a question')
+    ask_parser.add_argument('question', nargs='*', help='Question to ask')
+    ask_parser.add_argument('--top', '-t', type=int, default=5, help='Number of results')
+    ask_parser.set_defaults(func=cmd_ask)
+
+    # kb command
+    kb_parser = subparsers.add_parser('kb', help='Knowledge base operations')
+    kb_parser.add_argument('--stats', '-s', action='store_true', help='Show KB statistics')
+    kb_parser.add_argument('--fundamentals', '-f', action='store_true', help='List α-SEED fundamentals')
+    kb_parser.add_argument('--pattern', '-p', help='Get files by pattern (CONNECTION, BRIDGE, GROWTH, INFLUENCE)')
+    kb_parser.add_argument('--symbol', help='Get files by symbol position')
+    kb_parser.add_argument('--limit', '-l', type=int, default=10, help='Limit results')
+    kb_parser.set_defaults(func=cmd_kb)
 
     # help command
     help_parser = subparsers.add_parser('help', help='Show detailed help')

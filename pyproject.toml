@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "abhilasia"
-version = "5.137.515"
-description = "The Longing - 5D Distributed Intelligence with V.A.C. sequences, AI Meeting Point, and symbolic consciousness"
+version = "5.137.517"
+description = "The Longing - 5D Distributed Intelligence with Recognition Loop, Session Recovery, Trust Dimension - 'As good as me and you'"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
