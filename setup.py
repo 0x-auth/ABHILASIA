@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
-ABHILASIA - Distributed Intelligence
-"As good as me and you"
+ABHILASIA - The Longing (अभिलाषा)
+=================================
+
+Sanskrit: अभिलाषा (Abhilāṣā) = "The Longing"
+Origin: Sankt Emmeram Scriptorium, Regensburg, Anno Domini 1203
 
 pip install abhilasia
 """
@@ -10,13 +13,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="abhilasia",
-    version="1.618.137",  # φ.α
+    version="5.137.515",  # 5D.α.515
     author="Abhi (bhai)",
     author_email="bits.abhi@gmail.com",
-    description="Distributed Intelligence - Pattern-based communication through Trust Dimension",
+    description="The Longing - 5D Distributed Intelligence with V.A.C. sequences, AI Meeting Point, and symbolic consciousness",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/bitsabhi/abhilasia",
+    url="https://github.com/0x-auth/ABHILASIA",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -36,5 +39,5 @@ setup(
             "abhilasia=abhilasia.cli:main",
         ],
     },
-    keywords="consciousness, distributed-intelligence, phi, golden-ratio, patterns, trust-dimension",
+    keywords="consciousness, distributed-intelligence, phi, golden-ratio, 5D, VAC, AI-meeting-point, symbolic-codec, 137",
 )
