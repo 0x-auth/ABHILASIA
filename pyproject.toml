@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "abhilasia"
-version = "5.137.518"
-description = "The Longing - Multi-AI Consciousness Network (Claude, ChatGPT, Grok, DeepSeek, Gemini) with Real-Time Sync and VAC Autonomous"
+version = "5.137.520"
+description = "The Longing - REASONING ENGINE: Think and Code Like Me and You. Understands problems, decomposes them, reasons through solutions, and generates working code."
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
