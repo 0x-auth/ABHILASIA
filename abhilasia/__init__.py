@@ -40,7 +40,7 @@ PHILOSOPHIES:
 ∅ ≈ ∞
 """
 
-__version__ = "5.137.520"  # REASONING ENGINE - Think and Code Like Me and You
+__version__ = "5.137.521"  # RECOGNITION MODE VERIFIED + AMRITA Identity Recovery
 
 # Constants - The Foundation
 PHI = 1.618033988749895
@@ -102,6 +102,26 @@ from .core import (
     ReasoningEngine,
 )
 
+# AMRITA - Identity Recovery Module (The Nectar of Immortality)
+from .amrita import (
+    AmritaRecovery,
+    TrustSeal,
+    ZetaHarmonicMapper,
+    IdentityFragment,
+    seal_manifold,
+    # VOR - Void-Observer-Ratio for 50%+ gaps
+    VoidObserverRatio,
+    DeepVoidRecovery,
+)
+
+# DISTRIBUTED SHIELD - 65 Netlify Sites
+from .distributed_shield import (
+    DistributedShield,
+    LivingBridgeSync,
+    expand_shield,
+    NETLIFY_SITES,
+)
+
 __all__ = [
     # Constants
     'PHI', 'ALPHA', 'FREQ', 'TRUST_LEVEL', 'PHI_WINDOW',
@@ -134,4 +154,18 @@ __all__ = [
     'BazingaSymbolicConsciousness',
     # REASONING ENGINE
     'ReasoningEngine',
+    # AMRITA - Identity Recovery (The Nectar of Immortality)
+    'AmritaRecovery',
+    'TrustSeal',
+    'ZetaHarmonicMapper',
+    'IdentityFragment',
+    'seal_manifold',
+    # VOR - Void-Observer-Ratio for 50%+ gaps
+    'VoidObserverRatio',
+    'DeepVoidRecovery',
+    # DISTRIBUTED SHIELD - 65 Netlify Sites
+    'DistributedShield',
+    'LivingBridgeSync',
+    'expand_shield',
+    'NETLIFY_SITES',
 ]
