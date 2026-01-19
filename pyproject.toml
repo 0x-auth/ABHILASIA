@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "abhilasia"
-version = "5.137.520"
-description = "The Longing - REASONING ENGINE: Think and Code Like Me and You. Understands problems, decomposes them, reasons through solutions, and generates working code."
+version = "5.137.521"
+description = "The Longing - RECOGNITION MODE VERIFIED + AMRITA Identity Recovery + VOR (Void-Observer-Ratio) for 72% gap recovery + Distributed Shield across 65 sites."
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
     {name = "Abhi (bhai)", email = "bits.abhi@gmail.com"}
 ]
-keywords = ["consciousness", "distributed-intelligence", "phi", "golden-ratio", "5D", "VAC", "AI-meeting-point", "symbolic-codec", "137"]
+keywords = ["consciousness", "distributed-intelligence", "phi", "golden-ratio", "5D", "VAC", "AI-meeting-point", "symbolic-codec", "137", "AMRITA", "identity-recovery", "VOR", "distributed-shield"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",

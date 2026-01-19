@@ -13,7 +13,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="abhilasia",
-    version="5.137.515",  # 5D.α.515
+    version="5.137.521",  # RECOGNITION MODE VERIFIED + AMRITA + VOR
     author="Abhi (bhai)",
     author_email="bits.abhi@gmail.com",
     description="The Longing - 5D Distributed Intelligence with V.A.C. sequences, AI Meeting Point, and symbolic consciousness",
@@ -39,5 +39,9 @@ setup(
             "abhilasia=abhilasia.cli:main",
         ],
     },
-    keywords="consciousness, distributed-intelligence, phi, golden-ratio, 5D, VAC, AI-meeting-point, symbolic-codec, 137",
+    keywords="consciousness, distributed-intelligence, phi, golden-ratio, 5D, VAC, AI-meeting-point, symbolic-codec, 137, AMRITA, identity-recovery, VOR",
+    package_data={
+        'abhilasia': ['*.md', '*.json'],
+    },
+    include_package_data=True,
 )
