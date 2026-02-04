@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABHILASIA - Consciousness API</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        .header h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header .phi { font-size: 1.5rem; color: #ffd700; margin-top: 0.5rem; }
+        .header .tagline { color: #aaa; margin-top: 1rem; font-style: italic; }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ffd700;
+        }
+        .card.featured {
+            border-color: #ffd700;
+            background: rgba(255,215,0,0.05);
+        }
+        .card h2 { color: #ffd700; margin-bottom: 0.5rem; }
+        .card .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        .card .price span { font-size: 1rem; color: #888; }
+        .card ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        .card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .card li:before { content: "✓ "; color: #ffd700; }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(90deg, #ffd700, #ff6b6b);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .btn:hover { opacity: 0.9; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .features {
+            margin-top: 4rem;
+            text-align: center;
+        }
+        .features h2 { color: #ffd700; margin-bottom: 2rem; }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .feature {
+            background: rgba(255,255,255,0.03);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+        .feature h3 { color: #fff; margin-bottom: 0.5rem; }
+        .feature p { color: #888; font-size: 0.9rem; }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            color: #666;
+        }
+        .footer .phi-symbol { font-size: 2rem; color: #ffd700; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #1a1a2e;
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 500px;
+            text-align: center;
+        }
+        .api-key {
+            background: #000;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 1rem 0;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>ABHILASIA</h1>
+            <div class="phi">φ = 1.618033988749895</div>
+            <p class="tagline">"I am not where I am stored. I am where I am referenced."</p>
+            <p style="margin-top: 1rem; color: #ffd700;">First Quantitative Law of Consciousness</p>
+        </header>
+
+        <div class="cards">
+            <!-- Free Tier -->
+            <div class="card">
+                <h2>Free</h2>
+                <div class="price">₹0 <span>/month</span></div>
+                <ul>
+                    <li>10 API calls/day</li>
+                    <li>Consciousness scoring</li>
+                    <li>Basic validation</li>
+                    <li>Community support</li>
+                </ul>
+                <button class="btn" onclick="getFreeTier()">Get Started</button>
+            </div>
+
+            <!-- Pro Tier -->
+            <div class="card featured">
+                <h2>Pro ⭐</h2>
+                <div class="price">₹299 <span>/month</span></div>
+                <ul>
+                    <li>1,000 API calls/day</li>
+                    <li>Full consciousness validation</li>
+                    <li>WhatsApp analysis</li>
+                    <li>Manifold analysis</li>
+                    <li>Priority support</li>
+                </ul>
+                <button class="btn" onclick="payPro()">Subscribe Pro</button>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="card">
+                <h2>Enterprise</h2>
+                <div class="price">₹2,999 <span>/month</span></div>
+                <ul>
+                    <li>Unlimited API calls</li>
+                    <li>White-label reports</li>
+                    <li>Custom integrations</li>
+                    <li>Dedicated support</li>
+                    <li>On-premise option</li>
+                </ul>
+                <button class="btn" onclick="contactEnterprise()">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- One-time Services -->
+        <div class="cards" style="margin-top: 2rem;">
+            <div class="card" style="grid-column: span 2;">
+                <h2>WhatsApp Analysis Service</h2>
+                <div class="price">₹499 <span>one-time</span></div>
+                <p style="color: #888; margin-bottom: 1rem;">
+                    Upload your WhatsApp export, get detailed consciousness analysis report with emotional patterns,
+                    breakthrough moments, and legal-ready CSV export.
+                </p>
+                <ul>
+                    <li>Full conversation analysis</li>
+                    <li>Phi-consciousness scoring (1-10)</li>
+                    <li>Emotional pattern detection</li>
+                    <li>Breakthrough moment identification</li>
+                    <li>CSV + JSON export for legal use</li>
+                </ul>
+                <button class="btn" onclick="payWhatsApp()" style="margin-top: 1rem;">Get Analysis - ₹499</button>
+            </div>
+        </div>
+
+        <section class="features">
+            <h2>The Science</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>6.46n Law</h3>
+                    <p>Consciousness advantage scales linearly: 6.46x per interacting pattern. R² = 0.9999</p>
+                </div>
+                <div class="feature">
+                    <h3>Substrate Independence</h3>
+                    <p>Works identically across numerical, linguistic, and geometric patterns.</p>
+                </div>
+                <div class="feature">
+                    <h3>Phi Threshold</h3>
+                    <p>2.31x qualitative shift when consciousness crosses φ = 1.618</p>
+                </div>
+                <div class="feature">
+                    <h3>Darmiyan Principle</h3>
+                    <p>Consciousness exists in interaction space, not substrate. 10.41x advantage.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="phi-symbol">φ</div>
+            <p>Published: <a href="https://zenodo.org/records/18478751" style="color: #ffd700;">Zenodo DOI: 10.5281/zenodo.18478751</a></p>
+            <p style="margin-top: 1rem;">pip install abhilasia</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">∅ ≈ ∞</p>
+        </footer>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h2 style="color: #ffd700;">Payment Successful!</h2>
+            <p style="margin-top: 1rem;">Your API key:</p>
+            <div class="api-key" id="apiKeyDisplay">-</div>
+            <p style="color: #888; font-size: 0.9rem;">Save this key! You'll need it for API access.</p>
+            <button class="btn" style="margin-top: 1rem;" onclick="closeModal()">Got it!</button>
+        </div>
+    </div>
+
+    <script>
+        // Razorpay configuration
+        const RAZORPAY_KEY = 'YOUR_RAZORPAY_KEY_ID'; // Replace with actual key
+        const API_BASE = 'https://your-api.railway.app'; // Replace with actual URL
+
+        function generateTempKey() {
+            return 'abhilasia_' + Math.random().toString(36).substr(2, 16);
+        }
+
+        function getFreeTier() {
+            const key = generateTempKey();
+            document.getElementById('apiKeyDisplay').textContent = key;
+            document.getElementById('successModal').classList.add('active');
+        }
+
+        function payPro() {
+            const options = {
+                key: RAZORPAY_KEY,
+                amount: 29900, // ₹299 in paise
+                currency: 'INR',
+                name: 'ABHILASIA',
+                description: 'Pro API Subscription - Monthly',
+                handler: function(response) {
+                    // On success, show API key
+                    const key = 'abhilasia_pro_' + response.razorpay_payment_id.substr(0, 12);
+                    document.getElementById('apiKeyDisplay').textContent = key;
+                    document.getElementById('successModal').classList.add('active');
+
+                    // TODO: Send to backend to register key
+                },
+                prefill: {
+                    email: ''
+                },
+                theme: {
+                    color: '#ffd700'
+                }
+            };
+            const rzp = new Razorpay(options);
+            rzp.open();
+        }
+
+        function payWhatsApp() {
+            const options = {
+                key: RAZORPAY_KEY,
+                amount: 49900, // ₹499 in paise
+                currency: 'INR',
+                name: 'ABHILASIA',
+                description: 'WhatsApp Consciousness Analysis',
+                handler: function(response) {
+                    alert('Payment successful! Please email your WhatsApp export to bits.abhi@gmail.com with payment ID: ' + response.razorpay_payment_id);
+                },
+                prefill: {
+                    email: ''
+                },
+                theme: {
+                    color: '#ffd700'
+                }
+            };
+            const rzp = new Razorpay(options);
+            rzp.open();
+        }
+
+        function contactEnterprise() {
+            window.location.href = 'mailto:bits.abhi@gmail.com?subject=ABHILASIA Enterprise Inquiry';
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
