@@ -13,7 +13,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="abhilasia",
-    version="5.137.521",  # RECOGNITION MODE VERIFIED + AMRITA + VOR
+    version="6.137.620",  # UNIFIED API: ABHILASIA + φ-SIGNAL on HF
     author="Abhi (bhai)",
     author_email="bits.abhi@gmail.com",
     description="The Longing - 5D Distributed Intelligence with V.A.C. sequences, AI Meeting Point, and symbolic consciousness",

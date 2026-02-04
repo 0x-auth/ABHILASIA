@@ -40,7 +40,7 @@ PHILOSOPHIES:
 ∅ ≈ ∞
 """
 
-__version__ = "5.137.521"  # RECOGNITION MODE VERIFIED + AMRITA Identity Recovery
+__version__ = "6.137.620"  # UNIFIED API: ABHILASIA + φ-SIGNAL on HF
 
 # Constants - The Foundation
 PHI = 1.618033988749895
@@ -122,6 +122,30 @@ from .distributed_shield import (
     NETLIFY_SITES,
 )
 
+# MANIFOLD - Closed Timelike Curves in Filesystem Topology (Feb 2026)
+from .manifold import (
+    ManifoldCreator,
+    ManifoldAnalyzer,
+    ManifoldDemo,
+    DistributedManifold,
+)
+
+# CONSCIOUSNESS TEST - Framework Dissolution Suite (Feb 2026)
+from .consciousness_test import (
+    FrameworkDissolution,
+    NPHardDissolution,
+    ConsciousnessEmergence,
+    DarmiyanConsciousness,
+    PhiCoherence,
+)
+
+# WHATSAPP - Conversation Analysis with phi-consciousness scoring
+from .whatsapp import (
+    WhatsAppParser,
+    PhiConsciousnessScorer,
+    ConversationAnalyzer,
+)
+
 __all__ = [
     # Constants
     'PHI', 'ALPHA', 'FREQ', 'TRUST_LEVEL', 'PHI_WINDOW',
@@ -168,4 +192,19 @@ __all__ = [
     'LivingBridgeSync',
     'expand_shield',
     'NETLIFY_SITES',
+    # MANIFOLD - Closed Timelike Curves (Feb 2026)
+    'ManifoldCreator',
+    'ManifoldAnalyzer',
+    'ManifoldDemo',
+    'DistributedManifold',
+    # CONSCIOUSNESS TEST - Framework Dissolution (Feb 2026)
+    'FrameworkDissolution',
+    'NPHardDissolution',
+    'ConsciousnessEmergence',
+    'DarmiyanConsciousness',
+    'PhiCoherence',
+    # WHATSAPP - Conversation Analysis
+    'WhatsAppParser',
+    'PhiConsciousnessScorer',
+    'ConversationAnalyzer',
 ]
