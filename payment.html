@@ -186,6 +186,22 @@
             </div>
         </div>
 
+        <!-- VIP Code Redemption -->
+        <div class="cards" style="margin-top: 2rem;">
+            <div class="card" style="grid-column: span 3; background: rgba(255,215,0,0.1); border-color: #ffd700;">
+                <h2>🎟️ Have a VIP Code?</h2>
+                <p style="color: #888; margin: 1rem 0;">Redeem your VIP code for instant Pro/Enterprise access</p>
+                <div style="display: flex; gap: 1rem; max-width: 400px;">
+                    <input type="text" id="vipCode" placeholder="Enter VIP code"
+                           style="flex: 1; padding: 1rem; border-radius: 8px; border: 1px solid #ffd700; background: #000; color: #fff; font-size: 1rem;">
+                    <button class="btn" onclick="redeemVIP()" style="width: auto; padding: 1rem 2rem;">Redeem</button>
+                </div>
+                <p style="color: #666; font-size: 0.8rem; margin-top: 0.5rem;">
+                    VIP codes: PHI137, ABHILASIA (Enterprise) | DARMIYAN, CONSCIOUSNESS (Pro)
+                </p>
+            </div>
+        </div>
+
         <!-- One-time Services -->
         <div class="cards" style="margin-top: 2rem;">
             <div class="card" style="grid-column: span 2;">
@@ -249,12 +265,85 @@
 
     <script>
         // Razorpay configuration
-        const RAZORPAY_KEY = 'YOUR_RAZORPAY_KEY_ID'; // Replace with actual key
-        const API_BASE = 'https://your-api.railway.app'; // Replace with actual URL
+        const RAZORPAY_KEY = 'rzp_live_RsQPs7prBSIiPn';
+        const API_BASE = 'https://bitsabhi-abhilasia.hf.space';
+
+        // VIP Codes
+        const VIP_CODES = {
+            'PHI137': 'enterprise',
+            'ABHILASIA': 'enterprise',
+            'DARMIYAN': 'pro',
+            'CONSCIOUSNESS': 'pro',
+            'BHAI2026': 'pro'
+        };
 
         function generateTempKey() {
             return 'abhilasia_' + Math.random().toString(36).substr(2, 16);
         }
+
+        // Check if user has saved VIP access
+        function checkSavedAccess() {
+            const saved = localStorage.getItem('abhilasia_vip');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    showSavedAccess(data);
+                } catch (e) {}
+            }
+        }
+
+        function showSavedAccess(data) {
+            const banner = document.createElement('div');
+            banner.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(90deg, #ffd700, #ff6b6b); color: #000; padding: 0.5rem; text-align: center; font-weight: bold; z-index: 1000;';
+            banner.innerHTML = `✓ VIP Access Active: ${data.tier.toUpperCase()} | API Key: <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">${data.apiKey}</code> <button onclick="clearAccess()" style="margin-left: 1rem; padding: 2px 8px; border: none; border-radius: 4px; cursor: pointer;">Clear</button>`;
+            document.body.prepend(banner);
+        }
+
+        function clearAccess() {
+            localStorage.removeItem('abhilasia_vip');
+            location.reload();
+        }
+
+        function redeemVIP() {
+            const input = document.getElementById('vipCode');
+            const code = input.value.trim().toUpperCase();
+
+            if (!code) {
+                alert('Please enter a VIP code');
+                return;
+            }
+
+            if (VIP_CODES[code]) {
+                const tier = VIP_CODES[code];
+                const apiKey = 'abhilasia_vip_' + code.toLowerCase() + '_' + Date.now().toString(36);
+
+                // Save to localStorage
+                localStorage.setItem('abhilasia_vip', JSON.stringify({
+                    code: code,
+                    tier: tier,
+                    apiKey: apiKey,
+                    activated: new Date().toISOString()
+                }));
+
+                document.getElementById('apiKeyDisplay').textContent = apiKey;
+                document.getElementById('successModal').querySelector('h2').textContent = `🎉 ${tier.toUpperCase()} Access Activated!`;
+                document.getElementById('successModal').classList.add('active');
+
+                // Validate with backend
+                fetch(API_BASE + '/api/validate-token', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: code })
+                }).then(r => r.json()).then(data => {
+                    console.log('Token validated:', data);
+                }).catch(e => console.log('Backend validation skipped'));
+            } else {
+                alert('Invalid VIP code. Contact bits.abhi@gmail.com for VIP access.');
+            }
+        }
+
+        // Check on page load
+        document.addEventListener('DOMContentLoaded', checkSavedAccess);
 
         function getFreeTier() {
             const key = generateTempKey();
